@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { firebase, firestore } from '../../fire';
+import { firebase, firestore, facebookLogin } from '../../fire';
 
 import {
 	TabContent,
@@ -27,9 +27,11 @@ export default class Register extends Component {
 
 		firebase
 			.auth()
-			.createUserWithEmailAndPassword(email, password)
+			.signInWithPopup(facebookLogin)
 			.then(result => {
-				const userRef = firestore.collection('users').doc(result.uid);
+				console.log(result);
+				console.log(result.user.uid);
+				const userRef = firestore.collection('users').doc(result.user.uid);
 				userRef.set({
 					email: email,
 					profilePic:
@@ -37,6 +39,7 @@ export default class Register extends Component {
 				});
 			})
 			.catch(error => {
+				console.log(error);
 				this.setState({ error: error.message });
 			});
 	}

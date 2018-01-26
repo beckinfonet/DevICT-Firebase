@@ -11,4 +11,6 @@ const config = {
 };
 
 export const firebase = fb.initializeApp(config);
+
+export const facebookLogin = new fb.auth.FacebookAuthProvider();
 export const firestore = fb.firestore();

@@ -58,7 +58,6 @@ export default class EditProfilePic extends Component {
 		);
 	}
 
-	componentDidMount() {}
 	render() {
 		const { imagePreviewUrl } = this.state;
 		return (
